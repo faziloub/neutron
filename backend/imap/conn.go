@@ -67,9 +67,9 @@ func (b *conns) connect(username, password string) (email string, err error) {
 	b.clients[username] = &client{
 		id: username,
 		conn: &conn{
-			Client:      c,
-			idleClient:  idleClient{imapidle.NewClient(c)},
-			quotaClient: quotaClient{imapquota.NewClient(c)},
+			Client:     c,
+			idleClient: idleClient{imapidle.NewClient(c)},
+			//	quotaClient: quotaClient{imapquota.NewClient(c)},
 		},
 		lock:     &sync.Mutex{},
 		password: password,
@@ -170,7 +170,7 @@ func (b *conns) idle(clt *client) error {
 	reset := time.After(20 * time.Minute)
 
 	updates := make(chan interface{}, 1)
-	c.Updates = updates
+	// c.Updates = updates
 	for {
 		select {
 		case msg := <-updates:
@@ -275,10 +275,10 @@ func (b *conns) getLabelMailbox(user, label string) (mailbox string, err error) 
 
 	mailbox = label
 	for _, m := range mailboxes {
-		if getLabelID(m.Name) == label {
-			mailbox = m.Name
-			break
-		}
+		// if getLabelID(m.Name) == label {
+		mailbox = m.Name
+		break
+		// }
 	}
 
 	return
