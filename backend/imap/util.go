@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fazilb93/go-imap"
-	"github.com/fazilb93/neutron/backend"
-	_textproto "github.com/fazilb93/neutron/backend/util/textproto"
+	"github.com/faziloub/go-imap"
+	"github.com/faziloub/neutron/backend"
+	_textproto "github.com/faziloub/neutron/backend/util/textproto"
 )
 
 func formatAttachmentId(mailbox string, uid uint32, part string) string {

@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/fazilb93/neutron/backend"
+	"github.com/faziloub/neutron/backend"
 )
 
 type Addresses struct {

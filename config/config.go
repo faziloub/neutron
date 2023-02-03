@@ -2,9 +2,9 @@
 package config
 
 import (
-	"github.com/fazilb93/neutron/backend/disk"
-	"github.com/fazilb93/neutron/backend/imap"
-	"github.com/fazilb93/neutron/backend/smtp"
+	"github.com/faziloub/neutron/backend/disk"
+	"github.com/faziloub/neutron/backend/imap"
+	"github.com/faziloub/neutron/backend/smtp"
 )
 
 // Configuration for all backends.

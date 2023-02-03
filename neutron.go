@@ -6,13 +6,13 @@ import (
 
 	"gopkg.in/macaron.v1"
 
-	"github.com/fazilb93/neutron/backend"
-	"github.com/fazilb93/neutron/backend/disk"
-	"github.com/fazilb93/neutron/backend/imap"
-	"github.com/fazilb93/neutron/backend/memory"
-	"github.com/fazilb93/neutron/backend/smtp"
-	"github.com/fazilb93/neutron/config"
-	"github.com/fazilb93/neutron/router/api"
+	"github.com/faziloub/neutron/backend"
+	"github.com/faziloub/neutron/backend/disk"
+	"github.com/faziloub/neutron/backend/imap"
+	"github.com/faziloub/neutron/backend/memory"
+	"github.com/faziloub/neutron/backend/smtp"
+	"github.com/faziloub/neutron/config"
+	"github.com/faziloub/neutron/router/api"
 )
 
 const (

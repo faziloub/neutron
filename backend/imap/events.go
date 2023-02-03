@@ -3,8 +3,8 @@ package imap
 import (
 	"errors"
 
-	"github.com/fazilb93/go-imap"
-	"github.com/fazilb93/neutron/backend"
+	"github.com/faziloub/go-imap"
+	"github.com/faziloub/neutron/backend"
 )
 
 type Events struct {

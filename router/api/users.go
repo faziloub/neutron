@@ -6,7 +6,7 @@ import (
 
 	"gopkg.in/macaron.v1"
 
-	"github.com/fazilb93/neutron/backend"
+	"github.com/faziloub/neutron/backend"
 )
 
 type UserResp struct {

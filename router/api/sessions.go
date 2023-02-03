@@ -3,7 +3,7 @@ package api
 import (
 	"time"
 
-	"github.com/fazilb93/neutron/backend/util"
+	"github.com/faziloub/neutron/backend/util"
 )
 
 const SessionTimeout = 10 * time.Minute

@@ -4,9 +4,9 @@ package imap
 import (
 	"strconv"
 
-	"github.com/fazilb93/neutron/backend"
-	"github.com/fazilb93/neutron/backend/events"
-	"github.com/fazilb93/neutron/backend/util"
+	"github.com/faziloub/neutron/backend"
+	"github.com/faziloub/neutron/backend/events"
+	"github.com/faziloub/neutron/backend/util"
 )
 
 type Config struct {

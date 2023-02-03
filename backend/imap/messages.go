@@ -7,11 +7,11 @@ import (
 	"net/mail"
 	"time"
 
-	"github.com/fazilb93/go-imap"
+	"github.com/faziloub/go-imap"
 
-	"github.com/fazilb93/neutron/backend"
-	"github.com/fazilb93/neutron/backend/memory"
-	"github.com/fazilb93/neutron/backend/util/textproto"
+	"github.com/faziloub/neutron/backend"
+	"github.com/faziloub/neutron/backend/memory"
+	"github.com/faziloub/neutron/backend/util/textproto"
 )
 
 type updatableAttachments interface {

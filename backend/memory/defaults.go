@@ -1,7 +1,7 @@
 package memory
 
 import (
-	"github.com/fazilb93/neutron/backend"
+	"github.com/faziloub/neutron/backend"
 )
 
 func Populate(b *backend.Backend) (err error) {

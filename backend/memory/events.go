@@ -4,8 +4,8 @@ import (
 	"errors"
 	"log"
 
-	"github.com/fazilb93/neutron/backend"
-	"github.com/fazilb93/neutron/backend/util"
+	"github.com/faziloub/neutron/backend"
+	"github.com/faziloub/neutron/backend/util"
 )
 
 type Events struct {

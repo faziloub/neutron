@@ -1,7 +1,7 @@
 # neutron
 
 [![Build Status](https://travis-ci.org/emersion/neutron.svg?branch=master)](https://travis-ci.org/emersion/neutron)
-[![GoDoc](https://godoc.org/github.com/fazilb93/neutron?status.svg)](https://godoc.org/github.com/fazilb93/neutron)
+[![GoDoc](https://godoc.org/github.com/faziloub/neutron?status.svg)](https://godoc.org/github.com/faziloub/neutron)
 
 Self-hosted server for [Protonmail client](https://github.com/ProtonMail/WebClient).
 
@@ -27,7 +27,7 @@ Neutron is modular so it's easy to create new backends and handle more scenarios
 
 Keep in mind that Neutron is less secure than ProtonMail: most servers don't
 use full-disk encryption and aren't under 1,000 meters of granite rock in
-Switzerland. Also, SRP is not yet supported ([#35](https://github.com/fazilb93/neutron/issues/35)).
+Switzerland. Also, SRP is not yet supported ([#35](https://github.com/faziloub/neutron/issues/35)).
 If you use Neutron, make sure to [donate to ProtonMail](https://protonmail.com/donate)!
 
 ## Install
@@ -88,8 +88,8 @@ Requirements:
 
 ```shell
 # Get the code
-go get -u github.com/fazilb93/neutron
-cd $GOPATH/src/github.com/fazilb93/neutron
+go get -u github.com/faziloub/neutron
+cd $GOPATH/src/github.com/faziloub/neutron
 
 # Build the client
 git submodule init
@@ -110,7 +110,7 @@ docker create -p 4000:4000 -v $PWD/config.json:/config.json -v $PWD/db:/db neutr
 
 ## Backends
 
-All backends must implement the [backend interface](https://github.com/fazilb93/neutron/blob/master/backend/backend.go).
+All backends must implement the [backend interface](https://github.com/faziloub/neutron/blob/master/backend/backend.go).
 The main backend interface is split into multiple other backend interfaces for
 different roles: `ContactsBackend`, `LabelsBackend` and so on. This allows to
 build modular backends, e.g. a `MessagesBackend` which stores messages on an
@@ -118,9 +118,9 @@ IMAP server with a `ContactsBackend` which stores contacts on a LDAP server and
 a `SendBackend` which sends outgoing messages to a SMTP server.
 
 Writing a backend is just a matter of implementing the necessary functions. You
-can read the [`memory` backend](https://github.com/fazilb93/neutron/tree/master/backend/memory)
+can read the [`memory` backend](https://github.com/faziloub/neutron/tree/master/backend/memory)
 to understand how to do that. Docs for the backend are available here:
-https://godoc.org/github.com/fazilb93/neutron/backend#Backend
+https://godoc.org/github.com/faziloub/neutron/backend#Backend
 
 ## License
 

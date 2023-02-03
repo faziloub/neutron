@@ -3,7 +3,7 @@ package imap
 import (
 	"errors"
 
-	"github.com/fazilb93/neutron/backend"
+	"github.com/faziloub/neutron/backend"
 )
 
 func getLabelID(mailbox string) string {

@@ -6,8 +6,8 @@ import (
 	"net"
 	"net/smtp"
 
-	"github.com/fazilb93/neutron/backend"
-	"github.com/fazilb93/neutron/backend/util/textproto"
+	"github.com/faziloub/neutron/backend"
+	"github.com/faziloub/neutron/backend/util/textproto"
 )
 
 type SendBackend struct {

@@ -14,8 +14,8 @@ import (
 	//"strings"
 	//"io"
 
-	"github.com/fazilb93/neutron/backend"
-	"github.com/fazilb93/neutron/backend/util/textproto/chunksplit"
+	"github.com/faziloub/neutron/backend"
+	"github.com/faziloub/neutron/backend/util/textproto/chunksplit"
 )
 
 func ParseMessageHeader(msg *backend.Message, header *mail.Header) {

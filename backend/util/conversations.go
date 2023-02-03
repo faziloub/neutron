@@ -1,7 +1,7 @@
 package util
 
 import (
-	"github.com/fazilb93/neutron/backend"
+	"github.com/faziloub/neutron/backend"
 )
 
 // A conversations backend that builds one conversation per message (no threads).

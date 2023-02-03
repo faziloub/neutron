@@ -4,7 +4,7 @@ package smtp
 import (
 	"strconv"
 
-	"github.com/fazilb93/neutron/backend"
+	"github.com/faziloub/neutron/backend"
 )
 
 type PasswordsBackend interface {

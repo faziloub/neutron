@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fazilb93/neutron/backend"
+	"github.com/faziloub/neutron/backend"
 )
 
 // Stores private & public keys on disk.
