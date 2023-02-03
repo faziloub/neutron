@@ -4,7 +4,7 @@ package smtp
 import (
 	"strconv"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type PasswordsBackend interface {
@@ -13,9 +13,9 @@ type PasswordsBackend interface {
 
 type Config struct {
 	Hostname string
-	Port int
-	Suffix string
-	Tls bool
+	Port     int
+	Suffix   string
+	Tls      bool
 	SmtpHost string
 }
 

@@ -3,8 +3,8 @@ package memory
 import (
 	"errors"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/util"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/util"
 )
 
 type attachment struct {
@@ -49,7 +49,7 @@ func (b *Attachments) InsertAttachment(user string, att *backend.Attachment, con
 	att.Size = len(contents)
 	b.attachments[user] = append(b.attachments[user], &attachment{
 		Attachment: att,
-		Contents: contents,
+		Contents:   contents,
 	})
 	return att, nil
 }

@@ -4,8 +4,8 @@ import (
 	"errors"
 	"io/ioutil"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/go-imap"
+	"github.com/fazilb93/neutron/backend"
 )
 
 func (b *Messages) ListAttachments(user, msg string) ([]*backend.Attachment, error) {

@@ -3,8 +3,8 @@ package memory
 import (
 	"errors"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/util"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/util"
 )
 
 type Conversations struct {
@@ -51,7 +51,7 @@ func populateConversation(conv *backend.Conversation, msg *backend.Message) {
 		}
 
 		if label == nil {
-			label = &backend.ConversationLabel{ ID: labelId }
+			label = &backend.ConversationLabel{ID: labelId}
 			conv.Labels = append(conv.Labels, label)
 			conv.LabelIDs = append(conv.LabelIDs, labelId)
 		}

@@ -3,7 +3,7 @@ package api
 import (
 	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type ContactsResp struct {
@@ -22,8 +22,8 @@ type ContactResp struct {
 
 type UpdateContactReq struct {
 	Req
-	ID string `json:"id"`
-	Name string
+	ID    string `json:"id"`
+	Name  string
 	Email string
 }
 
@@ -40,7 +40,7 @@ func (api *Api) GetContacts(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &ContactsResp{
-		Resp: Resp{Ok},
+		Resp:     Resp{Ok},
 		Contacts: contacts,
 	})
 	return
@@ -58,19 +58,19 @@ func (api *Api) CreateContacts(ctx *macaron.Context, req CreateContactsReq) {
 		contact, err := api.backend.InsertContact(userId, contact)
 		if err != nil {
 			r.Response = &ErrorResp{
-				Resp: Resp{InternalServerError},
+				Resp:             Resp{InternalServerError},
 				ErrorDescription: err.Error(),
 			}
 		} else {
 			r.Response = &ContactResp{
-				Resp: Resp{Ok},
+				Resp:    Resp{Ok},
 				Contact: contact,
 			}
 		}
 	}
 
 	ctx.JSON(200, &BatchResp{
-		Resp: Resp{Batch},
+		Resp:      Resp{Batch},
 		Responses: respItems,
 	})
 }
@@ -80,11 +80,11 @@ func (api *Api) UpdateContact(ctx *macaron.Context, req UpdateContactReq) (err e
 
 	contact, err := api.backend.UpdateContact(userId, &backend.ContactUpdate{
 		Contact: &backend.Contact{
-			ID: req.ID,
-			Name: req.Name,
+			ID:    req.ID,
+			Name:  req.Name,
 			Email: req.Email,
 		},
-		Name: true,
+		Name:  true,
 		Email: true,
 	})
 	if err != nil {
@@ -92,7 +92,7 @@ func (api *Api) UpdateContact(ctx *macaron.Context, req UpdateContactReq) (err e
 	}
 
 	ctx.JSON(200, &ContactResp{
-		Resp: Resp{Ok},
+		Resp:    Resp{Ok},
 		Contact: contact,
 	})
 	return
@@ -110,7 +110,7 @@ func (api *Api) DeleteContacts(ctx *macaron.Context, req BatchReq) {
 		err := api.backend.DeleteContact(userId, id)
 		if err != nil {
 			r.Response = &ErrorResp{
-				Resp: Resp{InternalServerError},
+				Resp:             Resp{InternalServerError},
 				ErrorDescription: err.Error(),
 			}
 		} else {
@@ -119,7 +119,7 @@ func (api *Api) DeleteContacts(ctx *macaron.Context, req BatchReq) {
 	}
 
 	ctx.JSON(200, &BatchResp{
-		Resp: Resp{Batch},
+		Resp:      Resp{Batch},
 		Responses: respItems,
 	})
 }

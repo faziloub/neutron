@@ -3,12 +3,12 @@ package api
 import (
 	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type UpdateUserPasswordReq struct {
 	Req
-	Password string
+	Password    string
 	NewPassword string
 }
 

@@ -3,8 +3,8 @@ package imap
 import (
 	"errors"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/go-imap-quota"
+	quota "github.com/fazilb93/go-imap-quota"
+	"github.com/fazilb93/neutron/backend"
 )
 
 // IMAP backend cannot upate users, so when requesting to update it will just return silently.
@@ -71,17 +71,17 @@ func (b *Users) Auth(username, password string) (user *backend.User, err error) 
 	}
 
 	user = &backend.User{
-		ID: id,
-		Name: username,
+		ID:          id,
+		Name:        username,
 		DisplayName: username,
 		Addresses: []*backend.Address{
 			&backend.Address{
-				ID: username,
-				Email: email,
-				Send: 1,
+				ID:      username,
+				Email:   email,
+				Send:    1,
 				Receive: 1,
-				Status: 1,
-				Type: 1,
+				Status:  1,
+				Type:    1,
 			},
 		},
 	}

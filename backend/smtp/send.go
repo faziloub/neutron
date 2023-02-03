@@ -1,13 +1,13 @@
 package smtp
 
 import (
-	"errors"
 	"crypto/tls"
+	"errors"
 	"net"
 	"net/smtp"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/util/textproto"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/util/textproto"
 )
 
 type SendBackend struct {
@@ -56,7 +56,7 @@ func (b *SendBackend) SendMessage(user string, msg *backend.OutgoingMessage) err
 		}
 	}
 
-	auth := smtp.PlainAuth("", user + b.config.Suffix, password, smtpHost)
+	auth := smtp.PlainAuth("", user+b.config.Suffix, password, smtpHost)
 	if err = c.Auth(auth); err != nil {
 		return err
 	}

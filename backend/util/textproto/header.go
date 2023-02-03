@@ -4,7 +4,7 @@ import (
 	"net/textproto"
 	"time"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 func GetMessageHeader(msg *backend.Message) textproto.MIMEHeader {

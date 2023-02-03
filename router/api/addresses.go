@@ -3,8 +3,8 @@ package api
 import (
 	"errors"
 
+	"github.com/fazilb93/neutron/backend"
 	"gopkg.in/macaron.v1"
-	"github.com/emersion/neutron/backend"
 )
 
 func populateAddress(addr *backend.Address) {
@@ -18,8 +18,8 @@ func populateAddress(addr *backend.Address) {
 
 type CreateAddressReq struct {
 	Req
-	Domain string
-	Local string
+	Domain   string
+	Local    string
 	MemberID string
 }
 
@@ -40,11 +40,11 @@ func (api *Api) CreateAddress(ctx *macaron.Context, req CreateAddressReq) (err e
 
 	addr := &backend.Address{
 		DomainID: domain.ID,
-		Email: email,
-		Send: 1,
-		Receive: 1,
-		Status: 1,
-		Type: 2,
+		Email:    email,
+		Send:     1,
+		Receive:  1,
+		Status:   1,
+		Type:     2,
 	}
 
 	addr, err = api.backend.InsertAddress(userId, addr)
@@ -55,7 +55,7 @@ func (api *Api) CreateAddress(ctx *macaron.Context, req CreateAddressReq) (err e
 	populateAddress(addr)
 
 	ctx.JSON(200, &AddressResp{
-		Resp: Resp{Ok},
+		Resp:    Resp{Ok},
 		Address: addr,
 	})
 	return
@@ -68,7 +68,7 @@ func (api *Api) ToggleAddress(ctx *macaron.Context) (err error) {
 
 	update := &backend.AddressUpdate{
 		Address: &backend.Address{ID: addrId},
-		Status: true,
+		Status:  true,
 	}
 
 	switch action {

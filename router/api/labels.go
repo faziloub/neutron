@@ -5,7 +5,7 @@ import (
 
 	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type LabelsResp struct {
@@ -26,7 +26,7 @@ func (api *Api) GetLabels(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &LabelsResp{
-		Resp: Resp{Ok},
+		Resp:   Resp{Ok},
 		Labels: labels,
 	})
 	return
@@ -45,16 +45,16 @@ func (api *Api) CreateLabel(ctx *macaron.Context, req LabelReq) (err error) {
 	userId := api.getUserId(ctx)
 
 	label, err := api.backend.InsertLabel(userId, &backend.Label{
-		Name: req.Name,
+		Name:    req.Name,
 		Display: req.Display,
-		Color: req.Color,
+		Color:   req.Color,
 	})
 	if err != nil {
 		return
 	}
 
 	ctx.JSON(200, &LabelResp{
-		Resp: Resp{Ok},
+		Resp:  Resp{Ok},
 		Label: label,
 	})
 	return
@@ -66,17 +66,17 @@ func (api *Api) UpdateLabel(ctx *macaron.Context, req LabelReq) (err error) {
 	req.Label.ID = ctx.Params("id")
 
 	label, err := api.backend.UpdateLabel(userId, &backend.LabelUpdate{
-		Label: req.Label,
-		Name: true,
+		Label:   req.Label,
+		Name:    true,
 		Display: true,
-		Color: true,
+		Color:   true,
 	})
 	if err != nil {
 		return
 	}
 
 	ctx.JSON(200, &LabelResp{
-		Resp: Resp{Ok},
+		Resp:  Resp{Ok},
 		Label: label,
 	})
 	return
@@ -102,7 +102,7 @@ func (api *Api) UpdateLabelsOrder(ctx *macaron.Context, req LabelsOrderReq) (err
 	for i, lbl := range labels {
 		_, err = api.backend.UpdateLabel(userId, &backend.LabelUpdate{
 			Label: &backend.Label{
-				ID: lbl.ID,
+				ID:    lbl.ID,
 				Order: req.Order[i],
 			},
 			Order: true,

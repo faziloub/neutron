@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type Messages struct {
@@ -49,6 +49,6 @@ func (b *Messages) DeleteMessage(user, id string) error {
 func NewMessages(bkd backend.MessagesBackend, events backend.EventsBackend) backend.MessagesBackend {
 	return &Messages{
 		MessagesBackend: bkd,
-		events: events,
+		events:          events,
 	}
 }

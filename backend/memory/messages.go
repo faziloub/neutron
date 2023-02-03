@@ -3,8 +3,8 @@ package memory
 import (
 	"errors"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/util"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/util"
 )
 
 type Messages struct {
@@ -94,7 +94,7 @@ func (b *Messages) CountMessages(user string) (counts []*backend.MessagesCount, 
 				count = counts[i]
 			} else {
 				indexes[label] = len(counts)
-				count = &backend.MessagesCount{ LabelID: label }
+				count = &backend.MessagesCount{LabelID: label}
 				counts = append(counts, count)
 			}
 
@@ -142,6 +142,6 @@ func (b *Messages) DeleteMessage(user, id string) error {
 func NewMessages(attachments *Attachments) backend.MessagesBackend {
 	return &Messages{
 		Attachments: attachments,
-		messages: map[string][]*backend.Message{},
+		messages:    map[string][]*backend.Message{},
 	}
 }

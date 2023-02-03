@@ -3,14 +3,14 @@ package imap
 import (
 	"errors"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/go-imap"
+	"github.com/fazilb93/go-imap"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type Events struct {
 	backend.EventsBackend
 	conns *conns
-	msgs backend.MessagesBackend
+	msgs  backend.MessagesBackend
 }
 
 func (b *Events) DeleteAllEvents(user string) error {
@@ -72,8 +72,8 @@ func (b *Events) listenUpdates() {
 func newEvents(conns *conns, events backend.EventsBackend, msgs backend.MessagesBackend) *Events {
 	evts := &Events{
 		EventsBackend: events,
-		conns: conns,
-		msgs: msgs,
+		conns:         conns,
+		msgs:          msgs,
 	}
 
 	go evts.listenUpdates()

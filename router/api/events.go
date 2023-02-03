@@ -3,7 +3,7 @@ package api
 import (
 	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type EventResp struct {
@@ -68,7 +68,7 @@ func (api *Api) GetEvent(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &EventResp{
-		Resp: Resp{Ok},
+		Resp:  Resp{Ok},
 		Event: event,
 	})
 	return

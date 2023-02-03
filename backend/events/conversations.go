@@ -1,13 +1,13 @@
 package events
 
 import (
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type Conversations struct {
 	backend.ConversationsBackend
 	messages backend.MessagesBackend
-	events backend.EventsBackend
+	events   backend.EventsBackend
 }
 
 func (b *Conversations) InsertMessage(user string, msg *backend.Message) (*backend.Message, error) {
@@ -72,7 +72,7 @@ func (b *Conversations) DeleteMessage(user, id string) error {
 func NewConversations(bkd backend.ConversationsBackend, events backend.EventsBackend) backend.ConversationsBackend {
 	return &Conversations{
 		ConversationsBackend: bkd,
-		messages: NewMessages(bkd, events),
-		events: events,
+		messages:             NewMessages(bkd, events),
+		events:               events,
 	}
 }

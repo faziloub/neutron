@@ -1,16 +1,16 @@
 package api
 
 import (
+	"github.com/fazilb93/neutron/backend"
 	"gopkg.in/macaron.v1"
-	"github.com/emersion/neutron/backend"
 )
 
 type Member struct {
-	ID string
-	NickName string
-	Role int
+	ID        string
+	NickName  string
+	Role      int
 	Addresses []*backend.Address
-	Private int
+	Private   int
 }
 
 type MembersResp struct {
@@ -28,15 +28,15 @@ func (api *Api) GetMembers(ctx *macaron.Context) {
 	}
 
 	member := &Member{
-		ID: user.ID,
-		NickName: user.Name,
-		Role: backend.RolePaidAdmin,
+		ID:        user.ID,
+		NickName:  user.Name,
+		Role:      backend.RolePaidAdmin,
 		Addresses: user.Addresses,
-		Private: 1,
+		Private:   1,
 	}
 
 	ctx.JSON(200, &MembersResp{
-		Resp: Resp{Ok},
+		Resp:    Resp{Ok},
 		Members: []*Member{member},
 	})
 	return

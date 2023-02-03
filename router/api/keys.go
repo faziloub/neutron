@@ -3,11 +3,11 @@ package api
 import (
 	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type CreatePrivateKeyReq struct {
-	AddressID string
+	AddressID  string
 	PrivateKey string
 }
 
@@ -37,7 +37,7 @@ func (api *Api) CreatePrivateKey(ctx *macaron.Context, req CreatePrivateKeyReq) 
 
 type UpdateAllPrivateKeysReq struct {
 	Password string
-	Keys []*backend.Keypair
+	Keys     []*backend.Keypair
 }
 
 func (api *Api) UpdateAllPrivateKeys(ctx *macaron.Context, req UpdateAllPrivateKeysReq) {

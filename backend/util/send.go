@@ -3,11 +3,11 @@ package util
 import (
 	"time"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 // A SendBackend that does nothing.
-type NoopSend struct {}
+type NoopSend struct{}
 
 func (b *NoopSend) SendMessage(user string, msg *backend.OutgoingMessage) error {
 	return nil // Do nothing
@@ -16,7 +16,6 @@ func (b *NoopSend) SendMessage(user string, msg *backend.OutgoingMessage) error 
 func NewNoopSend() backend.SendBackend {
 	return &NoopSend{}
 }
-
 
 // A SendBackend that forwards all sent messages to a MessagesBackend.
 type EchoSend struct {

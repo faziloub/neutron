@@ -2,7 +2,7 @@
 package disk
 
 import (
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type Config struct {

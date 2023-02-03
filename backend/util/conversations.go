@@ -1,7 +1,7 @@
 package util
 
 import (
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 // A conversations backend that builds one conversation per message (no threads).
@@ -20,23 +20,23 @@ func (b *DummyConversations) ListConversationMessages(user, id string) ([]*backe
 
 func (b *DummyConversations) buildConversation(msg *backend.Message) *backend.Conversation {
 	conv := &backend.Conversation{
-		ID: msg.ID,
-		Order: msg.Order,
+		ID:          msg.ID,
+		Order:       msg.Order,
 		NumMessages: 1,
-		NumUnread: 1 - msg.IsRead,
-		Time: msg.Time,
-		Subject: msg.Subject,
-		Senders: []*backend.Email{msg.Sender},
-		Recipients: msg.ToList,
-		TotalSize: msg.Size,
-		LabelIDs: msg.LabelIDs,
+		NumUnread:   1 - msg.IsRead,
+		Time:        msg.Time,
+		Subject:     msg.Subject,
+		Senders:     []*backend.Email{msg.Sender},
+		Recipients:  msg.ToList,
+		TotalSize:   msg.Size,
+		LabelIDs:    msg.LabelIDs,
 	}
 
 	for _, lbl := range msg.LabelIDs {
 		conv.Labels = append(conv.Labels, &backend.ConversationLabel{
-			ID: lbl,
+			ID:          lbl,
 			NumMessages: 1,
-			NumUnread: 1 - msg.IsRead,
+			NumUnread:   1 - msg.IsRead,
 		})
 	}
 

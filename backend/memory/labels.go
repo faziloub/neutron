@@ -3,8 +3,8 @@ package memory
 import (
 	"errors"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/util"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/util"
 )
 
 type Labels struct {

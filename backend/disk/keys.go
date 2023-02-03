@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 // Stores private & public keys on disk.
@@ -13,7 +13,7 @@ import (
 // in DOMAIN/USERNAME.priv.gpg.
 type Keys struct {
 	config *Config
-	users backend.UsersBackend
+	users  backend.UsersBackend
 }
 
 func parseEmail(email string) (username, domain string) {
@@ -69,8 +69,8 @@ func (b *Keys) GetKeypair(email string) (keypair *backend.Keypair, err error) {
 	}
 
 	keypair = &backend.Keypair{
-		ID: email,
-		PublicKey: pub,
+		ID:         email,
+		PublicKey:  pub,
 		PrivateKey: priv,
 	}
 	return
@@ -113,7 +113,7 @@ func (b *Keys) UpdateKeypair(email string, keypair *backend.Keypair) (updated *b
 func NewKeys(config *Config, users backend.UsersBackend) backend.KeysBackend {
 	return &Keys{
 		config: config,
-		users: users,
+		users:  users,
 	}
 }
 

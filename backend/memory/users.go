@@ -3,8 +3,8 @@ package memory
 import (
 	"errors"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/util"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/util"
 )
 
 type Users struct {
@@ -69,7 +69,7 @@ func (b *Users) InsertUser(u *backend.User, password string) (*backend.User, err
 
 	// Insert new user
 	b.users[u.ID] = &user{
-		User: u,
+		User:     u,
 		password: password,
 	}
 

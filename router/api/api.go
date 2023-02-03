@@ -3,26 +3,26 @@ package api
 import (
 	"net/http"
 
-	"gopkg.in/macaron.v1"
 	"github.com/go-macaron/binding"
+	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type RespCode int
 
 const (
-	Ok RespCode = 1000
-	Batch = 1001
+	Ok    RespCode = 1000
+	Batch          = 1001
 
-	BadRequest = 400
+	BadRequest   = 400
 	Unauthorized = 401
-	NotFound = 404
+	NotFound     = 404
 
 	InternalServerError = 500
 )
 
-type Req struct {}
+type Req struct{}
 
 type Resp struct {
 	Code RespCode
@@ -30,14 +30,14 @@ type Resp struct {
 
 type ErrorResp struct {
 	Resp
-	Error string
+	Error            string
 	ErrorDescription string
 }
 
 func newErrorResp(err error) *ErrorResp {
 	return &ErrorResp{
-		Resp: Resp{InternalServerError},
-		Error: "unknown_error",
+		Resp:             Resp{InternalServerError},
+		Error:            "unknown_error",
 		ErrorDescription: err.Error(),
 	}
 }
@@ -54,18 +54,18 @@ type BatchResp struct {
 
 func newBatchResp(items []*BatchRespItem) *BatchResp {
 	return &BatchResp{
-		Resp: Resp{Batch},
+		Resp:      Resp{Batch},
 		Responses: items,
 	}
 }
 
 type BatchRespItem struct {
-	ID string
+	ID       string
 	Response interface{}
 }
 
 type Api struct {
-	backend *backend.Backend
+	backend  *backend.Backend
 	sessions map[string]*Session
 }
 
@@ -123,11 +123,11 @@ func (api *Api) keepSessionAlive(ctx *macaron.Context) {
 
 func New(m *macaron.Macaron, backend *backend.Backend) {
 	api := &Api{
-		backend: backend,
+		backend:  backend,
 		sessions: map[string]*Session{},
 	}
 
-	m.Use(func (ctx *macaron.Context) {
+	m.Use(func(ctx *macaron.Context) {
 		if appVersion, ok := ctx.Req.Header["X-Pm-Appversion"]; ok {
 			ctx.Data["appVersion"] = appVersion[0]
 		}
@@ -268,10 +268,10 @@ func New(m *macaron.Macaron, backend *backend.Backend) {
 	m.Post("/bugs/crash", binding.Json(CrashReq{}), api.Crash)
 
 	// Not found
-	m.Any("/*", func (ctx *macaron.Context) {
+	m.Any("/*", func(ctx *macaron.Context) {
 		ctx.JSON(http.StatusNotFound, &ErrorResp{
-			Resp: Resp{NotFound},
-			Error: "invalid_endpoint",
+			Resp:             Resp{NotFound},
+			Error:            "invalid_endpoint",
 			ErrorDescription: "Endpoint not found",
 		})
 	})

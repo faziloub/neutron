@@ -7,11 +7,11 @@ import (
 	"net/mail"
 	"time"
 
-	"github.com/emersion/go-imap"
+	"github.com/fazilb93/go-imap"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/memory"
-	"github.com/emersion/neutron/backend/util/textproto"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/memory"
+	"github.com/fazilb93/neutron/backend/util/textproto"
 )
 
 type updatableAttachments interface {
@@ -69,11 +69,11 @@ func (be *Messages) GetMessage(user, id string) (msg *backend.Message, err error
 	msg.Attachments = bodyStructureAttachments(data.BodyStructure)
 
 	// Apply header to msg
-        var bodySectionName *imap.BodySectionName
-        bodySectionName, err = imap.ParseBodySectionName(imap.FetchItem("RFC822.HEADER"))
-        if err != nil {
-                return
-        }
+	var bodySectionName *imap.BodySectionName
+	bodySectionName, err = imap.ParseBodySectionName(imap.FetchItem("RFC822.HEADER"))
+	if err != nil {
+		return
+	}
 
 	m, err := mail.ReadMessage(data.GetBody(bodySectionName))
 	if err != nil {
@@ -86,7 +86,7 @@ func (be *Messages) GetMessage(user, id string) (msg *backend.Message, err error
 	path, part := getPreferredPart(data.BodyStructure)
 
 	ch = make(chan *imap.Message, 1)
-	if err = c.UidFetch(seqset, []imap.FetchItem{imap.FetchItem("BODY.PEEK["+path+"]")}, ch); err != nil {
+	if err = c.UidFetch(seqset, []imap.FetchItem{imap.FetchItem("BODY.PEEK[" + path + "]")}, ch); err != nil {
 		return
 	}
 
@@ -96,10 +96,10 @@ func (be *Messages) GetMessage(user, id string) (msg *backend.Message, err error
 		return
 	}
 
-        bodySectionName, err = imap.ParseBodySectionName(imap.FetchItem("RFC822.HEADER"))
-        if err != nil {
-                return
-        }
+	bodySectionName, err = imap.ParseBodySectionName(imap.FetchItem("RFC822.HEADER"))
+	if err != nil {
+		return
+	}
 
 	r := decodePart(part, data.GetBody(bodySectionName))
 	b, err := ioutil.ReadAll(r)
@@ -448,7 +448,7 @@ func (b *Messages) UpdateMessage(user string, update *backend.MessageUpdate) (ms
 
 			outgoing.Attachments = append(outgoing.Attachments, &backend.OutgoingAttachment{
 				Attachment: att,
-				Data: d,
+				Data:       d,
 			})
 		}
 
@@ -550,7 +550,7 @@ func (b *Messages) DeleteMessage(user, id string) (err error) {
 
 func newMessages(conns *conns) *Messages {
 	return &Messages{
-		conns:     conns,
-		tmpAtts:   memory.NewAttachments().(updatableAttachments),
+		conns:   conns,
+		tmpAtts: memory.NewAttachments().(updatableAttachments),
 	}
 }

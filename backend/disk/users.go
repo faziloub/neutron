@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type UsersSettings struct {
@@ -132,7 +132,7 @@ func (b *UsersSettings) DeleteUser(id string) error {
 func NewUsersSettings(config *Config, users backend.UsersBackend) backend.UsersBackend {
 	return &UsersSettings{
 		UsersBackend: users,
-		config: config,
+		config:       config,
 	}
 }
 

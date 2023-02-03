@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/emersion/neutron/backend"
-	_textproto "github.com/emersion/neutron/backend/util/textproto"
-	"github.com/emersion/go-imap"
+	"github.com/fazilb93/go-imap"
+	"github.com/fazilb93/neutron/backend"
+	_textproto "github.com/fazilb93/neutron/backend/util/textproto"
 )
 
 func formatAttachmentId(mailbox string, uid uint32, part string) string {
@@ -98,10 +98,10 @@ func bodyStructureAttachments(structure *imap.BodyStructure) []*backend.Attachme
 		}
 
 		attachments = append(attachments, &backend.Attachment{
-			ID: part.Id,
-			Name: part.Params["name"],
+			ID:       part.Id,
+			Name:     part.Params["name"],
 			MIMEType: part.MIMEType + "/" + part.MIMESubType,
-			Size: int(part.Size),
+			Size:     int(part.Size),
 		})
 	}
 
@@ -121,7 +121,7 @@ func getPreferredPart(structure *imap.BodyStructure) (path string, part *imap.Bo
 		}
 		if part.MIMEType == "multipart" || p.MIMESubType == "html" {
 			part = p
-			path = strconv.Itoa(i+1)
+			path = strconv.Itoa(i + 1)
 		}
 	}
 
@@ -142,8 +142,8 @@ func parseAttachment(r io.Reader) (att *backend.Attachment, body io.Reader) {
 	mediaType, params, _ := mime.ParseMediaType(h.Get("Content-Type"))
 
 	att = &backend.Attachment{
-		ID: h.Get("Content-Id"),
-		Name: params["name"],
+		ID:       h.Get("Content-Id"),
+		Name:     params["name"],
 		MIMEType: mediaType,
 	}
 

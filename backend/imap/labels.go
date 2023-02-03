@@ -3,7 +3,7 @@ package imap
 import (
 	"errors"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 func getLabelID(mailbox string) string {
@@ -54,7 +54,7 @@ var colors = []string{
 }
 
 func getLabelColor(i int) string {
-	return colors[i % len(colors)]
+	return colors[i%len(colors)]
 }
 
 type Labels struct {
@@ -76,12 +76,12 @@ func (b *Labels) ListLabels(user string) (labels []*backend.Label, err error) {
 		}
 
 		labels = append(labels, &backend.Label{
-			ID: name,
-			Name: name,
-			Color: getLabelColor(i),
-			Display: 1,
-			Order: i,
-			Type: backend.LabelMessage,
+			ID:        name,
+			Name:      name,
+			Color:     getLabelColor(i),
+			Display:   1,
+			Order:     i,
+			Type:      backend.LabelMessage,
 			Exclusive: 1,
 		})
 

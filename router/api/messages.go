@@ -6,7 +6,7 @@ import (
 
 	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 func getLabelID(name string) (label string) {
@@ -27,18 +27,18 @@ func getLabelID(name string) (label string) {
 
 func getMessagesFilter(ctx *macaron.Context) *backend.MessagesFilter {
 	return &backend.MessagesFilter{
-		Limit: ctx.QueryInt("Limit"),
-		Page: ctx.QueryInt("Page"),
-		Label: ctx.Query("Label"),
-		Keyword: ctx.Query("Keyword"),
-		Address: ctx.Query("Address"),
+		Limit:       ctx.QueryInt("Limit"),
+		Page:        ctx.QueryInt("Page"),
+		Label:       ctx.Query("Label"),
+		Keyword:     ctx.Query("Keyword"),
+		Address:     ctx.Query("Address"),
 		Attachments: (ctx.Query("Attachments") == "1"),
-		From: ctx.Query("From"),
-		To: ctx.Query("To"),
-		Begin: ctx.QueryInt64("Begin"),
-		End: ctx.QueryInt64("End"),
-		Sort: ctx.Query("Sort"),
-		Desc: (ctx.Query("Desc") == "1"),
+		From:        ctx.Query("From"),
+		To:          ctx.Query("To"),
+		Begin:       ctx.QueryInt64("Begin"),
+		End:         ctx.QueryInt64("End"),
+		Sort:        ctx.Query("Sort"),
+		Desc:        (ctx.Query("Desc") == "1"),
 	}
 }
 
@@ -96,21 +96,21 @@ func (api *Api) populateMessage(userId string, msg *backend.Message) {
 
 type MessageReq struct {
 	Req
-	Message *backend.Message
-	ID string `json:"id"`
+	Message  *backend.Message
+	ID       string `json:"id"`
 	ParentID string
 }
 
 func (req MessageReq) getMessage() *backend.Message {
 	return &backend.Message{
-		ID: req.ID,
-		ToList: req.Message.ToList,
-		CCList: req.Message.CCList,
-		BCCList: req.Message.BCCList,
-		Subject: req.Message.Subject,
-		IsRead: req.Message.IsRead,
+		ID:        req.ID,
+		ToList:    req.Message.ToList,
+		CCList:    req.Message.CCList,
+		BCCList:   req.Message.BCCList,
+		Subject:   req.Message.Subject,
+		IsRead:    req.Message.IsRead,
 		AddressID: req.Message.AddressID,
-		Body: req.Message.Body,
+		Body:      req.Message.Body,
 	}
 }
 
@@ -131,7 +131,7 @@ func (api *Api) GetMessage(ctx *macaron.Context) (err error) {
 	api.populateMessage(userId, msg)
 
 	ctx.JSON(200, &MessageResp{
-		Resp: Resp{Ok},
+		Resp:    Resp{Ok},
 		Message: msg,
 	})
 	return
@@ -139,7 +139,7 @@ func (api *Api) GetMessage(ctx *macaron.Context) (err error) {
 
 type MessagesListResp struct {
 	Resp
-	Total int
+	Total    int
 	Messages []*backend.Message
 }
 
@@ -161,8 +161,8 @@ func (api *Api) ListMessages(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &MessagesListResp{
-		Resp: Resp{Ok},
-		Total: total,
+		Resp:     Resp{Ok},
+		Total:    total,
 		Messages: msgs,
 	})
 	return
@@ -182,7 +182,7 @@ func (api *Api) GetMessagesCount(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &MessagesCountResp{
-		Resp: Resp{Ok},
+		Resp:   Resp{Ok},
 		Counts: counts,
 	})
 	return
@@ -211,7 +211,7 @@ func (api *Api) GetMessagesTotal(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &MessagesTotalResp{
-		Resp: Resp{Ok},
+		Resp:          Resp{Ok},
 		MessagesTotal: *totals,
 	})
 	return
@@ -226,11 +226,11 @@ func (api *Api) batchUpdateMessages(ctx *macaron.Context, ids []string, updater 
 
 	for _, id := range ids {
 		update := &backend.MessageUpdate{
-			Message: &backend.Message{ ID: id },
+			Message: &backend.Message{ID: id},
 		}
 		updater(update)
 
-		r := &BatchRespItem{ ID: id }
+		r := &BatchRespItem{ID: id}
 		respItems = append(respItems, r)
 
 		_, err := api.backend.UpdateMessage(userId, update)
@@ -299,7 +299,7 @@ func (api *Api) UpdateMessagesSystemLabel(ctx *macaron.Context, req BatchReq) {
 
 type UpdateLabelReq struct {
 	Req
-	Action int
+	Action  int
 	LabelID string
 }
 
@@ -398,7 +398,7 @@ func (api *Api) CreateDraft(ctx *macaron.Context, req MessageReq) (err error) {
 	api.populateMessage(userId, msg)
 
 	ctx.JSON(200, &MessageResp{
-		Resp: Resp{Ok},
+		Resp:    Resp{Ok},
 		Message: msg,
 	})
 	return
@@ -413,15 +413,15 @@ func (api *Api) UpdateDraft(ctx *macaron.Context, req MessageReq) (err error) {
 	msg.Time = time.Now().Unix()
 
 	msg, err = api.backend.UpdateMessage(userId, &backend.MessageUpdate{
-		Message: msg,
-		ToList: true,
-		CCList: true,
-		BCCList: true,
-		Subject: true,
-		IsRead: true,
+		Message:   msg,
+		ToList:    true,
+		CCList:    true,
+		BCCList:   true,
+		Subject:   true,
+		IsRead:    true,
 		AddressID: true,
-		Body: true,
-		Time: true,
+		Body:      true,
+		Time:      true,
 	})
 	if err != nil {
 		return
@@ -430,7 +430,7 @@ func (api *Api) UpdateDraft(ctx *macaron.Context, req MessageReq) (err error) {
 	api.populateMessage(userId, msg)
 
 	ctx.JSON(200, &MessageResp{
-		Resp: Resp{Ok},
+		Resp:    Resp{Ok},
 		Message: msg,
 	})
 	return
@@ -438,10 +438,10 @@ func (api *Api) UpdateDraft(ctx *macaron.Context, req MessageReq) (err error) {
 
 type SendMessageReq struct {
 	Req
-	ID string `json:"id"`
-	Packages []*backend.MessagePackage
+	ID             string `json:"id"`
+	Packages       []*backend.MessagePackage
 	AttachmentKeys []*backend.AttachmentKey
-	ClearBody string
+	ClearBody      string
 }
 
 type SendMessageResp struct {
@@ -469,7 +469,7 @@ func (api *Api) SendMessage(ctx *macaron.Context, req SendMessageReq) (err error
 
 		outgoing.Attachments[i] = &backend.OutgoingAttachment{
 			Attachment: att,
-			Data: data,
+			Data:       data,
 		}
 	}
 
@@ -520,7 +520,7 @@ func (api *Api) SendMessage(ctx *macaron.Context, req SendMessageReq) (err error
 
 			outgoing.MessagePackage = &backend.MessagePackage{
 				Address: email.Address,
-				Body: req.ClearBody,
+				Body:    req.ClearBody,
 			}
 
 			err = api.backend.SendMessage(userId, outgoing)
@@ -533,11 +533,11 @@ func (api *Api) SendMessage(ctx *macaron.Context, req SendMessageReq) (err error
 	// Move message to Sent folder
 	msg, err = api.backend.UpdateMessage(userId, &backend.MessageUpdate{
 		Message: &backend.Message{
-			ID: msgId,
+			ID:       msgId,
 			LabelIDs: []string{backend.SentLabel},
-			Type: backend.SentType,
+			Type:     backend.SentType,
 		},
-		Type: true,
+		Type:     true,
 		LabelIDs: backend.ReplaceLabels,
 	})
 	if err != nil {
@@ -559,7 +559,7 @@ func (api *Api) DeleteMessages(ctx *macaron.Context, req BatchReq) {
 	var respItems []*BatchRespItem
 
 	for _, id := range req.IDs {
-		r := &BatchRespItem{ ID: id }
+		r := &BatchRespItem{ID: id}
 		respItems = append(respItems, r)
 
 		err := api.backend.DeleteMessage(userId, id)

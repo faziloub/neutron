@@ -6,14 +6,16 @@ import (
 	"encoding/base64"
 	"net/mail"
 	"net/textproto"
+
 	//"mime"
 	"mime/multipart"
 	"mime/quotedprintable"
+
 	//"strings"
 	//"io"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/util/textproto/chunksplit"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/util/textproto/chunksplit"
 )
 
 func ParseMessageHeader(msg *backend.Message, header *mail.Header) {
@@ -105,7 +107,6 @@ func ParseMessageHeader(msg *backend.Message, header *mail.Header) {
 	return
 }*/
 
-
 func formatMessage(header textproto.MIMEHeader, body string) string {
 	return FormatHeader(header) + "\r\n" + body
 }
@@ -143,7 +144,7 @@ func FormatOutgoingMessage(msg *backend.OutgoingMessage) string {
 		}
 
 		h := textproto.MIMEHeader{}
-		h.Set("Content-Type", mimeType + "; name=\"" + att.Name + "\"")
+		h.Set("Content-Type", mimeType+"; name=\""+att.Name+"\"")
 		h.Set("Content-Disposition", "attachment")
 		h.Set("Content-Transfer-Encoding", "base64")
 
@@ -162,7 +163,7 @@ func FormatOutgoingMessage(msg *backend.OutgoingMessage) string {
 	m.Close()
 
 	mh := GetOutgoingMessageHeader(msg)
-	mh.Set("Content-Type", "multipart/mixed; boundary=" + m.Boundary())
+	mh.Set("Content-Type", "multipart/mixed; boundary="+m.Boundary())
 
 	return formatMessage(mh, b.String())
 }

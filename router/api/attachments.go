@@ -1,12 +1,12 @@
 package api
 
 import (
+	"encoding/base64"
 	"io/ioutil"
 	"mime/multipart"
-	"encoding/base64"
 
+	"github.com/fazilb93/neutron/backend"
 	"gopkg.in/macaron.v1"
-	"github.com/emersion/neutron/backend"
 )
 
 func (api *Api) GetAttachment(ctx *macaron.Context) (b []byte, err error) {
@@ -35,10 +35,10 @@ func (api *Api) GetAttachment(ctx *macaron.Context) (b []byte, err error) {
 // form: attributes are needed to parse multipart form
 // See https://github.com/go-macaron/binding/issues/10
 type UploadAttachmentReq struct {
-	Filename string `form:"Filename"`
-	MessageID string `form:"MessageID"`
-	MIMEType string `form:"MIMEType"`
-	ContentID string `form:"ContentID"`
+	Filename   string                `form:"Filename"`
+	MessageID  string                `form:"MessageID"`
+	MIMEType   string                `form:"MIMEType"`
+	ContentID  string                `form:"ContentID"`
 	KeyPackets *multipart.FileHeader `form:"KeyPackets"`
 	DataPacket *multipart.FileHeader `form:"DataPacket"`
 }
@@ -46,7 +46,7 @@ type UploadAttachmentReq struct {
 type UploadAttachmentResp struct {
 	Resp
 	AttachmentID string
-	Size int
+	Size         int
 }
 
 func (api *Api) UploadAttachment(ctx *macaron.Context, req UploadAttachmentReq) (err error) {
@@ -75,9 +75,9 @@ func (api *Api) UploadAttachment(ctx *macaron.Context, req UploadAttachmentReq) 
 	}
 
 	att := &backend.Attachment{
-		Name: req.Filename,
-		MessageID: req.MessageID,
-		MIMEType: req.MIMEType,
+		Name:       req.Filename,
+		MessageID:  req.MessageID,
+		MIMEType:   req.MIMEType,
 		KeyPackets: base64.StdEncoding.EncodeToString(kp),
 	}
 
@@ -87,9 +87,9 @@ func (api *Api) UploadAttachment(ctx *macaron.Context, req UploadAttachmentReq) 
 	}
 
 	ctx.JSON(200, &UploadAttachmentResp{
-		Resp: Resp{Ok},
+		Resp:         Resp{Ok},
 		AttachmentID: att.ID,
-		Size: att.Size,
+		Size:         att.Size,
 	})
 	return
 }

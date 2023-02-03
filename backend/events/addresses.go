@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type Addresses struct {
@@ -45,6 +45,6 @@ func (b *Addresses) DeleteAddress(user, id string) (err error) {
 func NewAddresses(addrs backend.AddressesBackend, events backend.EventsBackend) backend.AddressesBackend {
 	return &Addresses{
 		AddressesBackend: addrs,
-		events: events,
+		events:           events,
 	}
 }

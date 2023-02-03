@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/emersion/neutron/backend"
-	"github.com/emersion/neutron/backend/events"
-	"github.com/emersion/neutron/backend/util"
+	"github.com/fazilb93/neutron/backend"
+	"github.com/fazilb93/neutron/backend/events"
+	"github.com/fazilb93/neutron/backend/util"
 )
 
 type Addresses struct {

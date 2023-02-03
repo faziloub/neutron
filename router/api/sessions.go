@@ -3,23 +3,23 @@ package api
 import (
 	"time"
 
-	"github.com/emersion/neutron/backend/util"
+	"github.com/fazilb93/neutron/backend/util"
 )
 
 const SessionTimeout = 10 * time.Minute
 
 type Session struct {
-	ID string
-	UserID string
-	Token string
+	ID      string
+	UserID  string
+	Token   string
 	Timeout *time.Timer
 }
 
 func NewSession(user string, expire func()) *Session {
 	return &Session{
-		ID: util.GenerateId(),
-		Token: util.GenerateId(),
-		UserID: user,
+		ID:      util.GenerateId(),
+		Token:   util.GenerateId(),
+		UserID:  user,
 		Timeout: time.AfterFunc(SessionTimeout, expire),
 	}
 }

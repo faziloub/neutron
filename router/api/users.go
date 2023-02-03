@@ -6,7 +6,7 @@ import (
 
 	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type UserResp struct {
@@ -16,14 +16,14 @@ type UserResp struct {
 
 type CreateUserReq struct {
 	Req
-	Username string
-	Password string
-	Domain string
-	Email string
-	News bool
+	Username   string
+	Password   string
+	Domain     string
+	Email      string
+	News       bool
 	PrivateKey string
-	Token string
-	TokenType string
+	Token      string
+	TokenType  string
 }
 
 type DirectUserResp struct {
@@ -99,8 +99,8 @@ func (api *Api) GetCurrentUser(ctx *macaron.Context) {
 	user, err := api.getCurrentUser(ctx)
 	if err != nil {
 		ctx.JSON(200, &ErrorResp{
-			Resp: Resp{NotFound},
-			Error: "invalid_user",
+			Resp:             Resp{NotFound},
+			Error:            "invalid_user",
 			ErrorDescription: err.Error(),
 		})
 		return
@@ -125,7 +125,7 @@ func (api *Api) CreateUser(ctx *macaron.Context, req CreateUserReq) (err error) 
 	// Insert user
 
 	user, err := api.backend.InsertUser(&backend.User{
-		Name: req.Username,
+		Name:              req.Username,
 		NotificationEmail: req.Email,
 	}, req.Password)
 	if err != nil {
@@ -136,11 +136,11 @@ func (api *Api) CreateUser(ctx *macaron.Context, req CreateUserReq) (err error) 
 
 	addr := &backend.Address{
 		DomainID: domain.ID,
-		Email: email,
-		Send: 1,
-		Receive: 1,
-		Status: 1,
-		Type: 1,
+		Email:    email,
+		Send:     1,
+		Receive:  1,
+		Status:   1,
+		Type:     1,
 	}
 
 	addr, err = api.backend.InsertAddress(user.ID, addr)
@@ -169,7 +169,7 @@ func (api *Api) CreateUser(ctx *macaron.Context, req CreateUserReq) (err error) 
 
 func (api *Api) GetDirectUser(ctx *macaron.Context) {
 	ctx.JSON(200, &DirectUserResp{
-		Resp: Resp{Ok},
+		Resp:   Resp{Ok},
 		Direct: 1,
 	})
 }
@@ -188,7 +188,7 @@ func (api *Api) GetUsernameAvailable(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &UsernameAvailableResp{
-		Resp: Resp{Ok},
+		Resp:      Resp{Ok},
 		Available: value,
 	})
 	return

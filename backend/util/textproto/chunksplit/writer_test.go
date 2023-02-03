@@ -4,36 +4,36 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/emersion/neutron/backend/util/textproto/chunksplit"
+	"github.com/fazilb93/neutron/backend/util/textproto/chunksplit"
 )
 
 func TestWriter(t *testing.T) {
-	tests := []struct{
-		input []string
+	tests := []struct {
+		input    []string
 		expected string
 	}{
 		{
-			input: []string{"helloworldhelloworldhelloworld"},
+			input:    []string{"helloworldhelloworldhelloworld"},
 			expected: "hello/world/hello/world/hello/world",
 		},
 		{
-			input: []string{"helloworldhelloworldhe"},
+			input:    []string{"helloworldhelloworldhe"},
 			expected: "hello/world/hello/world/he",
 		},
 		{
-			input: []string{"helloworldhelloworldhe", "ll"},
+			input:    []string{"helloworldhelloworldhe", "ll"},
 			expected: "hello/world/hello/world/hell",
 		},
 		{
-			input: []string{"helloworldhelloworldhe", "llo"},
+			input:    []string{"helloworldhelloworldhe", "llo"},
 			expected: "hello/world/hello/world/hello",
 		},
 		{
-			input: []string{"helloworldhelloworldhe", "lloworld"},
+			input:    []string{"helloworldhelloworldhe", "lloworld"},
 			expected: "hello/world/hello/world/hello/world",
 		},
 		{
-			input: []string{"helloworldhelloworldhe", "llo", "wor", "ld"},
+			input:    []string{"helloworldhelloworldhe", "llo", "wor", "ld"},
 			expected: "hello/world/hello/world/hello/world",
 		},
 	}

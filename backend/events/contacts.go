@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type Contacts struct {
@@ -45,6 +45,6 @@ func (b *Contacts) DeleteContact(user, id string) error {
 func NewContacts(bkd backend.ContactsBackend, events backend.EventsBackend) backend.ContactsBackend {
 	return &Contacts{
 		ContactsBackend: bkd,
-		events: events,
+		events:          events,
 	}
 }

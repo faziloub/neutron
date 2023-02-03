@@ -3,7 +3,7 @@ package textproto
 import (
 	"net/mail"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 func ParseEmail(addr *mail.Address) *backend.Email {

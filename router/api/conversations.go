@@ -3,12 +3,12 @@ package api
 import (
 	"gopkg.in/macaron.v1"
 
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type ConversationsListResp struct {
 	Resp
-	Total int
+	Total         int
 	Conversations []*backend.Conversation
 }
 
@@ -22,8 +22,8 @@ func (api *Api) ListConversations(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &ConversationsListResp{
-		Resp: Resp{Ok},
-		Total: total,
+		Resp:          Resp{Ok},
+		Total:         total,
 		Conversations: conversations,
 	})
 	return
@@ -38,7 +38,7 @@ func (api *Api) GetConversationsCount(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &MessagesCountResp{
-		Resp: Resp{Ok},
+		Resp:   Resp{Ok},
 		Counts: counts,
 	})
 	return
@@ -47,7 +47,7 @@ func (api *Api) GetConversationsCount(ctx *macaron.Context) (err error) {
 type ConversationResp struct {
 	Resp
 	Conversation *backend.Conversation
-	Messages []*backend.Message
+	Messages     []*backend.Message
 }
 
 func (api *Api) GetConversation(ctx *macaron.Context) (err error) {
@@ -69,9 +69,9 @@ func (api *Api) GetConversation(ctx *macaron.Context) (err error) {
 	}
 
 	ctx.JSON(200, &ConversationResp{
-		Resp: Resp{Ok},
+		Resp:         Resp{Ok},
 		Conversation: conv,
-		Messages: msgs,
+		Messages:     msgs,
 	})
 	return
 }
@@ -82,7 +82,7 @@ func (api *Api) batchUpdateConversationsMessages(ctx *macaron.Context, ids []str
 	var respItems []*BatchRespItem
 
 	for _, id := range ids {
-		r := &BatchRespItem{ ID: id }
+		r := &BatchRespItem{ID: id}
 		respItems = append(respItems, r)
 
 		msgs, err := api.backend.ListConversationMessages(userId, id)
@@ -94,7 +94,7 @@ func (api *Api) batchUpdateConversationsMessages(ctx *macaron.Context, ids []str
 		for _, msg := range msgs {
 			// Create a new Message struct to prevent modifications on msg
 			update := &backend.MessageUpdate{
-				Message: &backend.Message{ ID: msg.ID },
+				Message: &backend.Message{ID: msg.ID},
 			}
 			updater(update)
 
@@ -111,7 +111,7 @@ func (api *Api) batchUpdateConversationsMessages(ctx *macaron.Context, ids []str
 	}
 
 	ctx.JSON(200, &BatchResp{
-		Resp: Resp{Batch},
+		Resp:      Resp{Batch},
 		Responses: respItems,
 	})
 }
@@ -143,7 +143,7 @@ func (api *Api) DeleteConversations(ctx *macaron.Context, req BatchReq) {
 	var respItems []*BatchRespItem
 
 	for _, id := range req.IDs {
-		r := &BatchRespItem{ ID: id }
+		r := &BatchRespItem{ID: id}
 		respItems = append(respItems, r)
 
 		err := api.backend.DeleteConversation(userId, id)
@@ -156,7 +156,7 @@ func (api *Api) DeleteConversations(ctx *macaron.Context, req BatchReq) {
 	}
 
 	ctx.JSON(200, &BatchResp{
-		Resp: Resp{Batch},
+		Resp:      Resp{Batch},
 		Responses: respItems,
 	})
 }

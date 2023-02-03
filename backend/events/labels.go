@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/emersion/neutron/backend"
+	"github.com/fazilb93/neutron/backend"
 )
 
 type Labels struct {
@@ -45,6 +45,6 @@ func (b *Labels) DeleteLabel(user, id string) error {
 func NewLabels(bkd backend.LabelsBackend, events backend.EventsBackend) backend.LabelsBackend {
 	return &Labels{
 		LabelsBackend: bkd,
-		events: events,
+		events:        events,
 	}
 }

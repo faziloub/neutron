@@ -2,9 +2,9 @@
 package config
 
 import (
-	"github.com/emersion/neutron/backend/imap"
-	"github.com/emersion/neutron/backend/smtp"
-	"github.com/emersion/neutron/backend/disk"
+	"github.com/fazilb93/neutron/backend/disk"
+	"github.com/fazilb93/neutron/backend/imap"
+	"github.com/fazilb93/neutron/backend/smtp"
 )
 
 // Configuration for all backends.
@@ -30,7 +30,7 @@ type BackendConfig struct {
 type MemoryConfig struct {
 	*BackendConfig
 	Populate bool
-	Domains []string
+	Domains  []string
 }
 
 type ImapConfig struct {
@@ -47,8 +47,8 @@ type DiskConfig struct {
 	*BackendConfig
 	*disk.Config
 
-	Contacts *DiskConfig
-	Keys *DiskConfig
+	Contacts      *DiskConfig
+	Keys          *DiskConfig
 	UsersSettings *DiskConfig
-	Addresses *DiskConfig
+	Addresses     *DiskConfig
 }
